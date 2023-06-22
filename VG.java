@@ -49,3 +49,6 @@ public class VG {
     }
 
 }
+
+//add mathematical functionality and display options at the bottom of the GUI
+//maybe serparate into public and private?
