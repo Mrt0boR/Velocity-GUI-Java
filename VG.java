@@ -1,13 +1,15 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import javax.swing.*;
+import java.awt.*;
 
 public class VG {
+    //mathematical operation method
+    double distance;
+    double time;
+    
+    static double calculate(double distance, double time) {
+        return distance/time;
+    }
+
     public static void main(String[] args){
         JFrame frame = new JFrame("Velocity");
 
@@ -15,39 +17,50 @@ public class VG {
         JPanel panel = new JPanel(new GridBagLayout());
 
         //Jcomponents (incl gridbagcontraints)
-         GridBagConstraints dgbc = new GridBagConstraints();
+        GridBagConstraints dgbc = new GridBagConstraints();
         
-         JTextField distance = new JTextField(10);
+        JTextField distanceField = new JTextField(10);
         dgbc.gridx = 1;
         dgbc.gridy = 0;
-        panel.add(distance, dgbc);
-        JLabel distancelabel = new JLabel("Distance: ");
+        panel.add(distanceField, dgbc);
+
+        JLabel distanceLabel = new JLabel("Distance: ");
         dgbc.gridx = 0;
         dgbc.gridy = 0;
-    
-        panel.add(distancelabel, dgbc);
+        panel.add(distanceLabel, dgbc);
 
-       //align the label to the right place
-       GridBagConstraints tgbc1 = new GridBagConstraints();
-        JLabel timelabel = new JLabel("Time: ");
-        tgbc1.gridx = 0; //0
-        tgbc1.gridy = -1; //0 
-       
-       GridBagConstraints tgbc2 = new GridBagConstraints();
-       
-        JTextField timeinput = new JTextField(10);
+        JTextField timeField = new JTextField(10);
+        dgbc.gridx = 1;  //d 1
+        dgbc.gridy = 1; //0
+        panel.add(timeField, dgbc);
 
-        tgbc2.gridx = 1;  //d 1
-        tgbc2.gridy = -1; //0
-        
-        panel.add(timelabel, tgbc1);
-        panel.add(timeinput, tgbc2);
-            //Summing up
+        JLabel timeLabel = new JLabel("Time: ");
+        dgbc.gridx = 0; //0
+        dgbc.gridy = 1; //0 
+        panel.add(timeLabel, dgbc);
+
+        //add button to perform calculation
+        JButton calculateButton = new JButton("Calculate");
+        dgbc.gridx = 1;
+        dgbc.gridy = 2;
+        panel.add(calculateButton, dgbc);
+
+        //add output field
+        JTextField resultField = new JTextField(5);
+        dgbc.gridx = 1;
+        dgbc.gridy = 3;
+        panel.add(resultField, dgbc);
+
+        JLabel resultLabel = new JLabel("Result: ");
+        dgbc.gridx = 0;
+        dgbc.gridy = 3;
+        panel.add(resultLabel, dgbc);
+
+        //Summing up
         frame.getContentPane().add(panel);
         frame.setSize(300, 300);
         frame.setVisible(true);
     }
-
 }
 
 //add mathematical functionality and display options at the bottom of the GUI
