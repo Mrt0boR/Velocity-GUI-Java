@@ -1,13 +1,26 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class VG {
+public class VG implements ActionListener {
     
+    JTextField distanceField = new JTextField(10);
+    JTextField timeField = new JTextField(10);
+    JTextField resultField = new JTextField(5);
 
-    
-    public static void main(String[] args){
+    // constructor
+    public VG() {
+        GUISetup();
+    }
+
+    public String calculate(String distanceString, String timeString) {
+        double distance = Double.parseDouble(distanceString);
+        double time = Double.parseDouble(timeString);
+        double speed = distance/time;
+        return Double.toString(speed);
+    }
+
+    public void GUISetup() {
         JFrame frame = new JFrame("Velocity");
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -16,7 +29,6 @@ public class VG {
         //Jcomponents (incl gridbagcontraints)
         GridBagConstraints dgbc = new GridBagConstraints();
         
-        JTextField distanceField = new JTextField(10);
         dgbc.gridx = 1;
         dgbc.gridy = 0;
         panel.add(distanceField, dgbc);
@@ -26,7 +38,6 @@ public class VG {
         dgbc.gridy = 0;
         panel.add(distanceLabel, dgbc);
 
-        JTextField timeField = new JTextField(10);
         dgbc.gridx = 1;  //d 1
         dgbc.gridy = 1; //0
         panel.add(timeField, dgbc);
@@ -41,9 +52,9 @@ public class VG {
         dgbc.gridx = 1;
         dgbc.gridy = 2;
         panel.add(calculateButton, dgbc);
+        calculateButton.addActionListener(this);
 
         //add output field
-        JTextField resultField = new JTextField(5);
         dgbc.gridx = 1;
         dgbc.gridy = 3;
         panel.add(resultField, dgbc);
@@ -53,35 +64,25 @@ public class VG {
         dgbc.gridy = 3;
         panel.add(resultLabel, dgbc);
 
-       
-        calculateButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event){
-                String distanceinput = distanceField.getText();
-                String timeText = timeField.getText();
-
-
-                try {
-                    double distance = Double.parseDouble(distanceinput);
-                    double time = Double.parseDouble(timeText);
-                    double VelocityResult = distance / time ; 
-                    resultField.setText(Double.toString(VelocityResult));
-                } catch (NumberFormatException exeception) {
-                    resultField.setText("Invalid Input");
-                }
-            }
-            
-        });
-
-         //Summing up
         frame.getContentPane().add(panel);
         frame.setSize(300, 300);
         frame.setVisible(true);
-        
-
     }
 
+    public void actionPerformed(ActionEvent event) {
+       String distanceString = distanceField.getText();
+       String timeString = timeField.getText();
+       try{
+        String resultString = calculate(distanceString, timeString);
+        resultField.setText(resultString);
+       } catch (NumberFormatException exeception) {
+        resultField.setText("Invalid Input");
+       }
+   }
 
-    
+    public static void main(String[] args){
+        new VG();
+    }
 }
 
 
