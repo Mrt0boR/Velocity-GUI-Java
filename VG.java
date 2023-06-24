@@ -1,15 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class VG {
-    //mathematical operation method
-    double distance;
-    double time;
     
-    static double calculate(double distance, double time) {
-        return distance/time;
-    }
 
+    
     public static void main(String[] args){
         JFrame frame = new JFrame("Velocity");
 
@@ -56,12 +53,45 @@ public class VG {
         dgbc.gridy = 3;
         panel.add(resultLabel, dgbc);
 
-        //Summing up
+       
+        calculateButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event){
+                String distanceinput = distanceField.getText();
+                String timeText = timeField.getText();
+
+
+                try {
+                    double distance = Double.parseDouble(distanceinput);
+                    double time = Double.parseDouble(timeText);
+                    double VelocityResult = distance / time ; 
+                    resultField.setText(Double.toString(VelocityResult));
+                } catch (NumberFormatException exeception) {
+                    resultField.setText("Invalid Input");
+                }
+            }
+            
+        });
+
+         //Summing up
         frame.getContentPane().add(panel);
         frame.setSize(300, 300);
         frame.setVisible(true);
+        
+
     }
+
+
+    
 }
+
+
+
+
+
+
+
+
+
 
 //add mathematical functionality and display options at the bottom of the GUI
 //maybe serparate into public and private?
