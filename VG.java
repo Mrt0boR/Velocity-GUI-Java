@@ -4,11 +4,12 @@ import java.awt.event.*;
 
 public class VG implements ActionListener {
     
+    // textfields are made global variables to allow the button actionEvent method to pull their text
     JTextField distanceField = new JTextField(10);
     JTextField timeField = new JTextField(10);
     JTextField resultField = new JTextField(5);
 
-    // constructor
+    // constructor - good practice to include rather than loading up the main method
     public VG() {
         GUISetup();
     }
@@ -38,13 +39,13 @@ public class VG implements ActionListener {
         dgbc.gridy = 0;
         panel.add(distanceLabel, dgbc);
 
-        dgbc.gridx = 1;  //d 1
-        dgbc.gridy = 1; //0
+        dgbc.gridx = 1; 
+        dgbc.gridy = 1;
         panel.add(timeField, dgbc);
 
         JLabel timeLabel = new JLabel("Time: ");
-        dgbc.gridx = 0; //0
-        dgbc.gridy = 1; //0 
+        dgbc.gridx = 0;
+        dgbc.gridy = 1;
         panel.add(timeLabel, dgbc);
 
         //add button to perform calculation
@@ -84,15 +85,3 @@ public class VG implements ActionListener {
         new VG();
     }
 }
-
-
-
-
-
-
-
-
-
-
-//add mathematical functionality and display options at the bottom of the GUI
-//maybe serparate into public and private?
